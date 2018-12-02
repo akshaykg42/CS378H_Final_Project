@@ -61,6 +61,7 @@ func main() {
     flag.Parse()
 
     var plaintext string
+    //These are hardcoded rn, need to figure out source for each
     key := 1
     blocksize := 1
     iv := 1
@@ -81,5 +82,6 @@ func main() {
 
     t := time.Now()
     elapsed := t.Sub(start)
+    //Microseconds
     fmt.Println(float64(elapsed.Nanoseconds()) / 1000000.0)
 }
