@@ -19,16 +19,16 @@ import (
 //XORs 2 strings
 func xor(s1, s2 string) (output string) {
         for i := 0; i < len(s1); i++ {
-                output += string(s1[i] ^ s2[i % len(key)])
+                output += string(s1[i] ^ s2[i % len(s2)])
         }
 
         return output
 }
 
 //Currently just outputs 'x' * blocksize, needs to be an actual encryption function
-func encrypt(data string, key int, blocksize int) (out string) {
-    for i := range(blocksize){
-        out += 'x'
+func encrypt(data int, key int, blocksize int) (out string) {
+    for i := 0; i < blocksize; i++ {
+        out += "x"
     }
 
     return out
@@ -37,8 +37,8 @@ func encrypt(data string, key int, blocksize int) (out string) {
 //Takes input string and block size, returns the string separated into blocks
 //Note: Assumes that len(string) % blocksize == 0
 func get_blocks(data string, blocksize int) (blocks []string){
-    for i := range(len(data) / blocksize){
-        blocks = append(blocks, string[blocksize * i : blocksize * (i + 1)])
+    for i := 0; i < len(data) / blocksize; i++ {
+        blocks = append(blocks, data[blocksize * i : blocksize * (i + 1)])
     }
 
     return blocks
@@ -49,7 +49,7 @@ func crypto_ctr(plaintext string, key int, blocksize int, iv int) (output string
     blocks := get_blocks(plaintext, blocksize)
 
     for i, block := range(blocks){
-        output += append(encrypted, xor(block, encrypt(iv + i, key, blocksize)))
+        output += xor(block, encrypt(iv + i, key, blocksize))
     }
 
     return output
@@ -72,7 +72,7 @@ func main() {
     scanner := bufio.NewScanner(file)
 
     for scanner.Scan() {
-    	plaintext, _ := scanner.Text()
+    	plaintext = scanner.Text()
     }
 
     start := time.Now()
