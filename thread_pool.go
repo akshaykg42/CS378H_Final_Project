@@ -6,7 +6,7 @@ import (
 
 type ThreadPool struct {
 	numThreads int
-	inputs chan func()
+	inputs chan threadPoolTask
 	outputs chan int
 }
 
@@ -36,13 +36,12 @@ func (tp *ThreadPool) start() {
 /////////////////////
 
 
-func task(x int) {
-	fmt.Printf("x is: %d\n", x)
+type threadPoolTask interface {
+	say(x int) string
+	equal(x, y int) bool
 }
 
-func otherTask(y int)  {
-	fmt.Printf("y is: %d\n", y)
-}
+
 
 func main() {
 	tp := ThreadPool{}
@@ -50,7 +49,7 @@ func main() {
 
 	tp.start()
 	tp.inputs <- func() {
-		task(1)
+		say(1)
 	}
 	tp.inputs <- func() {
 		otherTask(2)
