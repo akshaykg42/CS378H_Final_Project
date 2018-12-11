@@ -60,7 +60,7 @@ func crypto_ctr(plaintext string, blocksize int, iv int) (output string){
     }
 
     return output
-}
+}x
 
 func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
@@ -72,16 +72,15 @@ func main() {
 	blocksize := 0
 	iv := 0
 
-
 	file, _ := os.Open(input)
     defer file.Close()
 	reader := bufio.NewReader(file)
 
 	line, _ := reader.ReadBytes('\n')
-	line = line[:len(line)-1]
+	line = line[:len(line) - 1]
 	blocksize, _ = strconv.Atoi(string(line))
 	line, _ = reader.ReadBytes('\n')
-	line = line[:len(line)-1]
+	line = line[:len(line) - 1]
 	plaintext = string(line)
 
     start := time.Now()

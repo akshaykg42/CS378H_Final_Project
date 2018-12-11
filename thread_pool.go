@@ -39,6 +39,7 @@ func (tp *ThreadPool) finish() {
 	close(tp.outputs)
 }
 
+
 /////////////////////
 
 func say(x int) string {
@@ -69,16 +70,18 @@ func main() {
 	// this is possibly the most disgusting code i have ever written
 	for addRunCount < 6 || sayRunCount < 6 || addReceiveCount < 6 || sayReceiveCount < 6{
 		if addRunCount < 6 {
+			i := addRunCount
 			select {
-			case tp.inputs <- func() interface{} { return add(1, 2) }:
+			case tp.inputs <- func() interface{} { return add(i, i) }:
 				addRunCount++
 			default:
 			}
 		}
 
 		if sayRunCount < 6 {
+			i := sayRunCount
 			select {
-			case tp.inputs <- func() interface{} { return say(5) }:
+			case tp.inputs <- func() interface{} { return say(i) }:
 				sayRunCount++
 			default:
 			}
