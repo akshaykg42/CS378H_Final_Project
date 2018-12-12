@@ -60,7 +60,7 @@ func crypto_ctr(plaintext string, blocksize int, iv int) (output string){
     }
 
     return output
-}x
+}
 
 func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
