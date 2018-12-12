@@ -73,11 +73,11 @@ func get_blocks(data string, blocksize int) (blocks []string){
 	return blocks
 }
 
-func ctr_parallelized(plaintext string, blocksize int, iv int) string{
+func ctr_parallelized(plaintext string, blocksize int, iv int, workers int) string{
 	blocks := get_blocks(plaintext, blocksize)
 
 	tp := ThreadPool{}
-	tp.init(1, 0, 0)
+	tp.init(workers, 0, 0)
 	tp.start()
 
 	inputCount := 0
@@ -142,7 +142,7 @@ func main() {
 
 	start := time.Now()
 
-	ctr_parallelized(plaintext, blocksize, iv)
+	ctr_parallelized(plaintext, blocksize, iv, workers)
 
 	t := time.Now()
 	elapsed := t.Sub(start)
