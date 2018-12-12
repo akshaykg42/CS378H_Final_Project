@@ -140,6 +140,12 @@ func main() {
 	line = line[:len(line) - 1]
 	plaintext = string(line)
 
-	fmt.Println(ctr_parallelized(plaintext, blocksize, iv))
+	start := time.Now()
 
+	ctr_parallelized(plaintext, blocksize, iv)
+
+	t := time.Now()
+	elapsed := t.Sub(start)
+	//Microseconds
+	fmt.Println(float64(elapsed.Nanoseconds()) / 1000000.0)
 }

@@ -85,12 +85,12 @@ func main() {
 
     start := time.Now()
 
-    output := crypto_ctr(plaintext, blocksize, iv)
+    crypto_ctr(plaintext, blocksize, iv)
 
     t := time.Now()
     elapsed := t.Sub(start)
     //Microseconds
     fmt.Println(float64(elapsed.Nanoseconds()) / 1000000.0)
 
-    fmt.Println(output)
+    //fmt.Println(output)
 }
