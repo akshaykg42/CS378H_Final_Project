@@ -17,16 +17,16 @@ import (
     "time"
 )
 
-func count3s(array []int64){
-	count := 0
+func count3s(array []int64) int{
+    count := 0
 
-	for _, num := range(array){
-		if(num == 3){
-			count++
-		}
-	}
+    for _, num := range(array){
+        if(num == 3){
+            count++
+        }
+    }
 
-	//fmt.Println(count)
+    return count
 }
 
 func main() {
