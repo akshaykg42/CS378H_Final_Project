@@ -30,7 +30,6 @@ func xor(s1, s2 string) (output string) {
 	 return output
 }
 
-//Currently just outputs 'x' * blocksize, needs to be an actual encryption function
 func prf(data int, blocksize int) (out string) {
 	out = ""
     for i := 0; i < blocksize; i++ {
@@ -58,7 +57,6 @@ func crypto_ctr(plaintext string, blocksize int, iv int) (output string){
     for i, block := range(blocks){
         output += xor(block, prf(iv + i, blocksize))
     }
-
     return output
 }
 
